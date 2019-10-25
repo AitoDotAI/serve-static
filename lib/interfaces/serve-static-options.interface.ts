@@ -7,6 +7,12 @@ export interface ServeStaticModuleOptions {
    * Path to render static app. Default: * (wildcard - all paths)
    */
   renderPath?: string;
+
+  /**
+   * Default action to replace 'default index.html'-functionality
+   */
+  defaultActionOnMissing?: (req: any, res: any) => any;
+
   /**
    * Serve static options (static files)
    * Passed down to the underlying either `express.static` or `fastify-static.send`

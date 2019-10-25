@@ -17,9 +17,11 @@ export class ExpressLoader extends AbstractLoader {
     const clientPath = options.rootPath;
     const indexFilePath = this.getIndexFilePath(clientPath);
 
+    const action = options.defaultActionOnMissing
+      ? options.defaultActionOnMissing
+      : (req: any, res: any) => res.sendFile(indexFilePath);
+
     app.use(express.static(clientPath, options.serveStaticOptions));
-    app.get(options.renderPath, (req: any, res: any) =>
-      res.sendFile(indexFilePath)
-    );
+    app.get(options.renderPath, action);
   }
 }
